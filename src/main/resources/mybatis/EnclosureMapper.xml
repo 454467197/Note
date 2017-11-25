@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javalei.dao.EnclosureMapper" >
+  <resultMap id="BaseResultMap" type="com.javalei.pojo.Enclosure" >
+    <constructor >
+      <idArg column="eid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="did" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="epath" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createtime" jdbcType="TIME" javaType="java.util.Date" />
+      <arg column="createdate" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eid, did, userId, ename, epath, ip, createtime, createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from enclosure
+    where eid = #{eid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from enclosure
+    where eid = #{eid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.javalei.pojo.Enclosure" >
+    insert into enclosure (eid, did, userId, 
+      ename, epath, ip, createtime, 
+      createdate)
+    values (#{eid,jdbcType=INTEGER}, #{did,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{ename,jdbcType=VARCHAR}, #{epath,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{createtime,jdbcType=TIME}, 
+      #{createdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.javalei.pojo.Enclosure" >
+    insert into enclosure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="did != null" >
+        did,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="epath != null" >
+        epath,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="epath != null" >
+        #{epath,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIME},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.javalei.pojo.Enclosure" >
+    update enclosure
+    <set >
+      <if test="did != null" >
+        did = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="epath != null" >
+        epath = #{epath,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIME},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.javalei.pojo.Enclosure" >
+    update enclosure
+    set did = #{did,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      ename = #{ename,jdbcType=VARCHAR},
+      epath = #{epath,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIME},
+      createdate = #{createdate,jdbcType=DATE}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+</mapper>
