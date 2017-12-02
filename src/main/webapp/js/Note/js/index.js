@@ -24,12 +24,12 @@ let rootElement = document.getElementById('root')
    
 let store=createStore(add,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-console.log("state",store.getState())
+ 
 let test=actions.add(1,1,"dname2","文本2内容");
 store.dispatch(test);
  test=actions.add(2,2,"dname4","文本3内容");
 store.dispatch(test);
-console.log(store.getState())
+ 
 
  
     render(

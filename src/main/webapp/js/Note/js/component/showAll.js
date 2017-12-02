@@ -2,7 +2,7 @@ import React  from 'react';
 import {Table,notification,Input,Button} from 'antd'; 
 import {connect} from 'react-redux';
 import * as actions from '../action/add'
-
+ 
  
    const columns = [{
     title: 'id',
@@ -12,6 +12,7 @@ import * as actions from '../action/add'
     title: '状态',
     dataIndex: 'state',
     key: 'state',
+    render: (data) => data==0?"未完成":"已完成"
   }, {
     title: '标题',
     dataIndex: 'dname',
@@ -19,12 +20,11 @@ import * as actions from '../action/add'
     render: (data) => <a href="#">{data}</a>
   }, {
     title: '内容',
-    dataIndex: 'text',
-    key: 'text',
+    dataIndex: 'content',
+    key: 'content',
   }];
 
 
- 
 
    
    
@@ -33,31 +33,87 @@ import * as actions from '../action/add'
     class ShowAll extends React.Component{
       
       constructor(prop){
+        console.log("fetch",fetch)
         super(prop)
         notification.open({
           message: 'Success',
           description: '已经成功加载数据'
         });
         _this=this;
-        console.log("prop",prop);
-      
+       
        
       }
 
-    
+        componentWillMount(){
+           console.log("componentWillMount",this.props)
+            const {getAll} =this.props;
 
-      enterIconLoading(){
+
+            fetch('/all.do')
+                .then((data)=> data.json()).then((data)=>{
+                getAll(data);
+
+            })
+        }
+
+
+
+        enterIconLoading(){
        const {data,adddata}=this.props;
-       console.log(data.length,"-------");
-       adddata(data.length,0,_this.refs.text.refs.input.value,_this.refs.name.refs.input.value);
+       
+       adddata(data.length,0,_this.refs.name.refs.input.value,_this.refs.text.refs.input.value);
            
       }
-    
+
+      p1(data,error){
+        return new Promise(function(resolve,reject){
+          resolve("test");
+          setTimeout(function(){
+            console.log("this is p1");
+          },3000)
+
+        })
+      }
+
+      p2(data,error){
+        return new Promise(function(resolve,reject){
+          console.log("data",data)
+          console.log('error',error);
+          resolve("test2");
+          setTimeout(function(){
+            console.log("this is p2");
+          },3000)
+
+        })
+      }
+      p3(data,error){
+        return new Promise(function(resolve,reject){
+          console.log("data",data)
+          console.log('error',error);
+          resolve("---p3");
+          setTimeout(function(){
+            console.log("this is p3");
+          },3000)
+
+        })
+      }
+      p4(data,error){
+        console.log("data",data)
+        console.log('error',error);
+        return new Promise(function(resolve,reject){
+          setTimeout(function(){
+            console.log("this is p4");
+          },3000)
+
+        })
+      }
 
 
       render(){
-        console.log(_this);
-        const {data}=this.props;
+         const {p1,p2,p3,p4}=_this;
+         const {data}=this.props;
+
+         // p1().then(p2).then(p3).then(p4);
          
        return  <div style={{margin:'300px'}}>
          
@@ -88,7 +144,10 @@ import * as actions from '../action/add'
       return {
         adddata:(id,state,dname,text)=>{
             dispatch(actions.add(id,state,dname,text));
-        }
+        },
+        getAll:(data)=>{
+           dispatch({type:"getall",data:data});
+      }
      }
     }
   
