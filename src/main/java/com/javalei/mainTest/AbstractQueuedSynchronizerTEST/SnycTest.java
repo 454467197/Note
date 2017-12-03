@@ -10,7 +10,7 @@ public class SnycTest {
 
 
         public void test(){
-            final Lock lock = new ReentrantLock();
+            final Lock lock = new MyQuenedSynchronizer();
             class Worker extends Thread {
                 public void run() {
                     while (true) {
@@ -27,7 +27,7 @@ public class SnycTest {
                 }
             }
             // 启动10个子线程
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 1; i++) {
                 Worker w = new Worker();
                 w.setDaemon(true);
                 w.start();
