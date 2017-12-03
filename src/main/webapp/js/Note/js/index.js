@@ -14,7 +14,7 @@ import { Router, Route, hashHistory } from 'react-router';
 import {createStore} from 'redux';
 import  add from  './reducers/add';
 
-import  showall from './component/showAll';
+import  showall from './component/Qrcode';
 import  App from './component/app';
 import * as actions from './action/add';
 
