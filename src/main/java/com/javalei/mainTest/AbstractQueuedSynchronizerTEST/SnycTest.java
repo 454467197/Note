@@ -10,7 +10,9 @@ public class SnycTest {
 
 
         public void test(){
-            final Lock lock = new MyQuenedSynchronizer();
+            final Lock lock;
+            lock= new MyQuenedSynchronizer();
+
             class Worker extends Thread {
                 public void run() {
                     while (true) {

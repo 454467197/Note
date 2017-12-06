@@ -18,18 +18,16 @@ public class MyShaerQuenedSynchronizer implements Lock{
         //TODO 共享锁没有理解清楚
         @Override
         protected int tryAcquireShared(int arg) {
-            final  Thread thread=Thread.currentThread();
-            for(;;){
-                int c=arg+1;
-                if(getExclusiveOwnerThread()!=thread&&compareAndSetState(arg,c)){
-                    setExclusiveOwnerThread(thread);
-                    return  c;
-                }else {
+            //首先获取正在使用的线程数
+            int count=getState()-arg;
+            //如果count小于0 那么已经占用的锁的数量肯定是小于你这次需要获取的锁的数量的 所以直接返回负数
+            if(count<0)
+                return  count;
+            // 如果不小于0的话 那么我就必须要尝试获取锁 使用cas进行锁的获取 如果获取失败 返回 count
+            if(!compareAndSetState(count,arg))
+                return  count;
 
-                }
-
-            }
-            return super.tryAcquireShared(arg);
+            return  1;
         }
 
         @Override

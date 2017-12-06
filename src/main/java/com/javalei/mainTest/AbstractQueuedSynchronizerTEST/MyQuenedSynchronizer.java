@@ -99,10 +99,10 @@ public class MyQuenedSynchronizer implements Lock {
      * @throws InterruptedException
      */
     @Override
-    public void lockInterruptibly() throws InterruptedException {
-           sync.acquireInterruptibly(1);
-    }
-
+    public void lockInterruptibly() throws InterruptedException
+        {
+            sync.acquireInterruptibly(1);
+        }
     @Override
     public boolean tryLock() {
         return sync.tryAcquire(1);
@@ -116,7 +116,7 @@ public class MyQuenedSynchronizer implements Lock {
 
     @Override
     public void unlock() {
-        sync.tryRelease(1);
+        sync.release(1);
     }
 
     @Override
