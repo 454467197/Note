@@ -16,6 +16,11 @@ public class volatileThread  implements  Runnable{
         System.out.println(Thread.currentThread().getName()+"----------"+i++);
     }
 
+    public static void main(String[] args) {
+
+
+        System.out.println( "使用黄色");
+    }
 
 
 }
